@@ -66,26 +66,16 @@ done
 user=$(whoami)
 hostname=$(hostname | sed 's/.local//g')
 
-# v4 and v6 address detection
+# ip address detection
 if [[ "${opt_offline}" = f ]]; then
     ipfile4="${HOME}/.archey-ipv4"
-    ipfile6="${HOME}/.archey-ipv6"
     if [ -a "$ipfile4" ] && test `find "$ipfile4" -mmin -360`; then
         while read -r line; do
             V4="$line"
         done < "$ipfile4"
     else
-        if V4=$(curl -sS --max-time 5 https://4.ifcfg.me/ 2>/dev/null); then
+        if V4=$(curl -sS --max-time 5 ipinfo.io/ip 2>/dev/null); then
             echo $V4 > "$ipfile4"
-        fi
-    fi
-    if [ -a "$ipfile6" ] && test `find "$ipfile6" -mmin -360`; then
-        while read -r line; do
-            V6="$line"
-        done < "$ipfile6"
-    else
-        if V6=$(curl -sS --max-time 5 https://6.ifcfg.me/ 2>/dev/null); then
-            echo $V6 > "$ipfile6"
         fi
     fi
 fi
@@ -158,14 +148,11 @@ fi
 # Texts had to be shortend to fit in 80 window
 if [ "${opt_offline}" = f ]; then
     if [ ! -z "$V4" ]; then
-      fieldlist[${#fieldlist[@]}]="${textColor}IPv4:${normal} ${V4}${normal}"
-    fi
-    if [ ! -z "$V6" ]; then
-      fieldlist[${#fieldlist[@]}]="${textColor}IPv6:${normal} ${V6}${normal}"
+      fieldlist[${#fieldlist[@]}]="${textColor}Public IPv4:${normal} ${V4}${normal}"
     fi
 fi
 if [ "${opt_localip}" = t ]; then
-	fieldlist[${#fieldlist[@]}]="${textColor}Local IP:${normal} ${localip}${normal}"
+	fieldlist[${#fieldlist[@]}]="${textColor}Local IPv4:${normal} ${localip}${normal}"
 fi
 
 logofile=${ARCHEY_LOGO_FILE:-"${HOME}/.config/archey-logo"}

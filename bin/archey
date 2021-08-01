@@ -94,8 +94,9 @@ load=$(uptime 2> /dev/null | sed -e 's/.*up\s*//'|cut -d , -f 4|cut -d : -f 2)
 shell="$SHELL"
 terminal="$TERM ${TERM_PROGRAM//_/ }"
 cpu=$(sysctl -n machdep.cpu.brand_string)
-cores=$(sysctl hw.physicalcpu hw.logicalcpu|grep logical|cut -d : -f 2)
+cores=$(sysctl hw.logicalcpu|grep logical|cut -d : -f 2)
 battery=$(ioreg -c AppleSmartBattery -r | awk '$1~/Capacity/{c[$1]=$3} END{OFMT="%.2f%"; max=c["\"MaxCapacity\""]; if (max>0) { print 100*c["\"CurrentCapacity\""]/max;} }')
+battery_cycles=$(system_profiler SPPowerDataType | grep Cycle|cut -d : -f 2)
 
 # removes (R) and (TM) from the CPU name so it fits in a standard 80 window
 cpu=$(echo "$cpu" | awk '$1=$1' | sed 's/([A-Z]\{1,2\})//g')
@@ -143,11 +144,12 @@ if [ ${packagehandler} -ne 0 ]; then
     fieldlist[${#fieldlist[@]}]="${textColor}Packages:${normal} ${packagehandler}${normal}"
 fi
 fieldlist[${#fieldlist[@]}]="${textColor}CPU:${normal} ${cpu}${normal}"
-fieldlist[${#fieldlist[@]}]="${textColor}Cores:${normal} ${cores}${normal}"
+fieldlist[${#fieldlist[@]}]="${textColor}Logical Cores:${normal} ${cores}${normal}"
 fieldlist[${#fieldlist[@]}]="${textColor}Memory:${normal} ${ram}${normal}"
 fieldlist[${#fieldlist[@]}]="${textColor}Disk:${normal} ${disk}${normal}"
 if [[ ! -z $battery ]]; then
     fieldlist[${#fieldlist[@]}]="${textColor}Battery:${normal} ${battery}%${normal}"
+    fieldlist[${#fieldlist[@]}]="${textColor}Battery Cycles:${normal} ${battery_cycles}${normal}"
 fi
 # Texts had to be shortend to fit in 80 window
 if [ "${opt_offline}" = f ]; then
@@ -182,6 +184,7 @@ ${BLUE#   }        ################           ${fieldlist[11]}
 ${BLUE#   }         ####     #####            ${fieldlist[12]}
 ${BLUE#   }                                   ${fieldlist[13]}
 ${BLUE#   }                                   ${fieldlist[14]}
+${BLUE#   }                                   ${fieldlist[15]}
 ${normal}
 "
 fi

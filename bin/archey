@@ -180,6 +180,8 @@ ${PURPLE# }     ######################        ${fieldlist[9]}
 ${PURPLE# }      ####################         ${fieldlist[10]}
 ${BLUE#   }        ################           ${fieldlist[11]}
 ${BLUE#   }         ####     #####            ${fieldlist[12]}
+${BLUE#   }                                   ${fieldlist[13]}
+${BLUE#   }                                   ${fieldlist[14]}
 ${normal}
 "
 fi

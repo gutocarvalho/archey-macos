@@ -102,6 +102,8 @@ battery_cycles=$(system_profiler SPPowerDataType | grep Cycle|cut -d : -f 2)
 cpu=$(echo "$cpu" | awk '$1=$1' | sed 's/([A-Z]\{1,2\})//g')
 
 ram="$(( $(sysctl -n hw.memsize) / 1024 ** 3  )) GB"
+memory_pressure=$(memory_pressure|grep "System-wide"|cut -d : -f2)
+
 disk=$(df | head -2 | tail -1 | awk '{print $5}')
 
 
@@ -146,7 +148,8 @@ fi
 fieldlist[${#fieldlist[@]}]="${textColor}CPU:${normal} ${cpu}${normal}"
 fieldlist[${#fieldlist[@]}]="${textColor}Logical Cores:${normal} ${cores}${normal}"
 fieldlist[${#fieldlist[@]}]="${textColor}Memory:${normal} ${ram}${normal}"
-fieldlist[${#fieldlist[@]}]="${textColor}Disk:${normal} ${disk}${normal}"
+fieldlist[${#fieldlist[@]}]="${textColor}Memory Pressure:${normal} ${memory_pressure}${normal}"
+fieldlist[${#fieldlist[@]}]="${textColor}Disk Free space:${normal} ${disk}${normal}"
 if [[ ! -z $battery ]]; then
     fieldlist[${#fieldlist[@]}]="${textColor}Battery:${normal} ${battery}%${normal}"
     fieldlist[${#fieldlist[@]}]="${textColor}Battery Cycles:${normal} ${battery_cycles}${normal}"
@@ -185,6 +188,7 @@ ${BLUE#   }         ####     #####            ${fieldlist[12]}
 ${BLUE#   }                                   ${fieldlist[13]}
 ${BLUE#   }                                   ${fieldlist[14]}
 ${BLUE#   }                                   ${fieldlist[15]}
+${BLUE#   }                                   ${fieldlist[16]}
 ${normal}
 "
 fi

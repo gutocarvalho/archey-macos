@@ -1,8 +1,9 @@
 # Archey for MacOS
 
-An archey script for OS X forked from obihann/archey-osx.
+An archey script for MacOS forked from obihann/archey-osx.
 
 ```sh
+
 ❯ ./archey
 
                  ###               User: gutocarvalho

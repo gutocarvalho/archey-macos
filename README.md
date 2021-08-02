@@ -4,14 +4,14 @@ An archey script for MacOS forked from obihann/archey-osx.
 
 ```sh
 
-❯ ./archey
+❯ ./archey -l
 
                  ###               User: gutocarvalho
                ####                Hostname: teletraan
                ###                 Distro: macOS 11.5
        #######    #######          Kernel: Darwin
-     ######################        Uptime:  9 days, 12:32
-    #####################          Load:  2.85 4.57 4.54
+     ######################        Uptime:  9 days, 12:42
+    #####################          Load:  1.68 2.88 3.81
     ####################           Shell: /bin/zsh
     ####################           Terminal: xterm-256color iTerm.app
     #####################          CPU: Intel Core i5-5287U CPU @ 2.90GHz
@@ -21,6 +21,7 @@ An archey script for MacOS forked from obihann/archey-osx.
          ####     #####            Battery: 99.98%
                                    Battery Cycles:  2
                                    Public IPv4: 186.195.34.120
+                                   Local IPv4: 192.168.68.152
 ```
 
 ## Table Of Contents

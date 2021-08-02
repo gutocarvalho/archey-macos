@@ -10,15 +10,16 @@ An archey script for MacOS forked from obihann/archey-osx.
                ####                Hostname: teletraan
                ###                 Distro: macOS 11.5
        #######    #######          Kernel: Darwin
-     ######################        Uptime:  9 days, 12:42
-    #####################          Load:  1.68 2.88 3.81
+     ######################        Uptime:  9 days, 13:13
+    #####################          Load:  2.18 2.74 3.34
     ####################           Shell: /bin/zsh
     ####################           Terminal: xterm-256color iTerm.app
     #####################          CPU: Intel Core i5-5287U CPU @ 2.90GHz
      ######################        Logical Cores:  4
       ####################         Memory: 16 GB
-        ################           Disk: 36%
-         ####     #####            Battery: 99.98%
+        ################           Memory Pressure:  65%
+         ####     #####            Disk Free space: 36%
+                                   Battery: 99.98%
                                    Battery Cycles:  2
                                    Public IPv4: 186.195.34.120
                                    Local IPv4: 192.168.68.152
